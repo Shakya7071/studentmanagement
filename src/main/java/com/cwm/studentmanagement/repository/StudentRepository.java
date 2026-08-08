@@ -1,0 +1,17 @@
+package com.cwm.studentmanagement.repository;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.cwm.studentmanagement.model.Students;
+
+public interface StudentRepository extends JpaRepository<Students, Long> {
+
+	boolean existsByEmailIgnoreCase(String email);
+
+	boolean existsByEmailIgnoreCaseAndIdNot(String email, Long id);
+	
+	Page<Students> findByActiveTrue(Pageable pageable);
+	
+}
