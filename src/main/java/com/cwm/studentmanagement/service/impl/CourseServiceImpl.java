@@ -1,5 +1,8 @@
 package com.cwm.studentmanagement.service.impl;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,7 +13,7 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.cwm.studentmanagement.controller.CourseController;
+
 import com.cwm.studentmanagement.dto.CourseDTO;
 import com.cwm.studentmanagement.model.Courses;
 import com.cwm.studentmanagement.repository.CourseRepository;
@@ -84,6 +87,13 @@ public class CourseServiceImpl implements CourseService {
 		
 		Log.info("code from update page: {}, id: {}", code, id);
 		return courseRepository.existsByCourseCodeIgnoreCaseAndIdNot(code, id);
+	}
+
+	@Override
+	public List<CourseDTO> getAllCourses() {
+				return courseRepository.findByActiveTrue(Sort.by("courseName")).stream()
+				.map(course -> mapper.map(course, CourseDTO.class))
+				.collect(Collectors.toList());
 	}
 
 }

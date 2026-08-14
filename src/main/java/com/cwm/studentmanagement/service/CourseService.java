@@ -1,5 +1,7 @@
 package com.cwm.studentmanagement.service;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 
 import com.cwm.studentmanagement.dto.CourseDTO;
@@ -19,5 +21,6 @@ public interface CourseService {
 	
 	CourseDTO updateCourse(Long id, CourseDTO courseDTO);
 	
+	List<CourseDTO> getAllCourses();
 	
 }

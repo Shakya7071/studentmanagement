@@ -28,7 +28,7 @@
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div>
                                         <h6 class="card-title mb-0">Total Students</h6>
-                                        <h2 class="my-2">1,250</h2>
+                                        <h2 class="my-2" th:text="${dashboardStats.totalStudents}"></h2>
                                     </div>
                                     <i class="bi bi-people fs-1 opacity-50"></i>
                                 </div>
@@ -41,7 +41,7 @@
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div>
                                         <h6 class="card-title mb-0">Total Courses</h6>
-                                        <h2 class="my-2">42</h2>
+                                        <h2 class="my-2" th:text="${dashboardStats.totalCourses}"></h2>
                                     </div>
                                     <i class="bi bi-book fs-1 opacity-50"></i>
                                 </div>
@@ -54,7 +54,7 @@
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div>
                                         <h6 class="card-title mb-0">Top Performing Courses</h6>
-                                        <h2 class="my-2">CS101</h2>
+                                        <h2 class="my-2" th:text="${dashboardStats.topPerformingCourse}"></h2>
                                     </div>
                                     <i class="bi bi-trophy fs-1 opacity-50"></i>
                                 </div>
@@ -67,7 +67,7 @@
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div>
                                         <h6 class="card-title mb-0">Students Enrolled This Month</h6>
-                                        <h2 class="my-2">37</h2>
+                                        <h2 class="my-2" th:text="${dashboardStats.studentsEnrolledThisMonth}"></h2>
                                     </div>
                                     <i class="bi bi-person-check fs-1 opacity-50"></i>
                                 </div>
@@ -83,39 +83,30 @@
                         Recent Student Registrations
                     </div>
                     <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table table-hover">
+                     <div class="text-muted" th:if="${students.isEmpty()}">No course found</div>
+                        <div class="table-responsive" th:if="${!students. isEmpty()}">
+                            <table class="table table-hover table-striped align-middle">
                                 <thead>
                                     <tr>
-                                        <th>ID</th>
-                                        <th>Name</th>
-                                        <th>Course</th>
-                                        <th>Enroll Date</th>
-                                        <th>Duration</th>
+                                        <th>#</th>
+                                        <th>Student Name</th>
+                                        <th>Email</th>
+                                        <th>Courses Count</th>
+                                        <th>Total Fee</th>
+                                        <th>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td data-label="ID">#STU001</td>
-                                        <td data-label="Name">Abhay Singh Rawat</td>
-                                        <td data-label="Course">Computer Science</td>
-                                        <td data-label="Enroll Date">2028-10-05</td>
-                                        <td data-label="Duration">6 Months</td>
-                                    </tr>
-                                    <tr>
-                                        <td data-label="ID">#STU002</td>
-                                        <td data-label="Name">Bhavesh Joshi</td>
-                                        <td data-label="Course">Mathematics</td>
-                                        <td data-label="Enroll Date">2028-10-02</td>
-                                        <td data-label="Duration">5 Months</td>
-                                    </tr>
-                                    <tr>
-                                        <td data-label="ID">#STU003</td>
-                                        <td data-label="Name">Chaman Diwakar</td>
-                                        <td data-label="Course">Chemistry</td>
-                                        <td data-label="Enroll Date">2028-10-04</td>
-                                        <td data-label="Duration">6 Months</td>
-                                    </tr>
+                                    <tr th:each="student : ${students}">
+                                       <td data-label="ID" th:text="${student.studentId}"></td>
+                                        <td data-label="Name" th:text="${student.studentName}"></td>
+                                        <td data-label="Email" th:text="${student.email}"></td>
+                                        <td data-label="Courses Count" th:text="${student.courseCount}"></td>
+                                        <td data-label="Total Fee" th:text="${student.totalFee}"></td>
+                                        <td data-label="Actions">
+                                            <a th:href="@{/enrollments/getStudentEnrollmentDetails/{id}(id=${student.studentId}, source='dashboard')}" class="btn btn-sm btn-info text-white" title="View"><i class="bi bi-eye"></i></a>
+                                        </td>
+                                    </tr>                                 
                                 </tbody>
                             </table>
                         </div>

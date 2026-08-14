@@ -15,7 +15,7 @@
                 <i class="bi bi-mortarboard-fill me-2"></i> SMS Admin
             </div>
             <div class="list-group list-group-flush">
-                <a href="dashboard.html" class="sidebar-link">
+                <a th:href="@{/dashboard}" class="sidebar-link">
                     <i class="bi bi-speedometer2"></i> Dashboard
                 </a>
                 <a th:href="@{/course/list}" class="sidebar-link active">
@@ -24,12 +24,22 @@
                 <a th:href="@{/students/list}" class="sidebar-link">
                     <i class="bi bi-people"></i> Students
                 </a>
-                <a href="enroll-course.html" class="sidebar-link">
+                 <a th:href="@{/enrollments/enrollmentList}" class="sidebar-link">
+                    <i class="bi bi-check2-square"></i> Enrolled Students
+                </a>
+                <a th:href="@{/enrollments/showEnroll}" class="sidebar-link">
                     <i class="bi bi-check2-square"></i> Enroll to Course
                 </a>
-                <a href="login.html" class="sidebar-link mt-auto border-top border-secondary">
-                    <i class="bi bi-box-arrow-right"></i> Logout
-                </a>
+                <form method="post" th:action="@{/logout}" class="m-0">
+           <input type="hidden"
+           th:name="${_csrf.parameterName}"
+           th:value="${_csrf.token}" />
+
+                   <button type="submit"
+                     class="sidebar-link border-0 bg-transparent text-white w-100 text-start">
+                 <i class="bi bi-box-arrow-right"></i> Logout
+            </button>
+         </form>
             </div>
         </div>
         

@@ -1,5 +1,8 @@
 package com.cwm.studentmanagement.service.impl;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -52,7 +55,7 @@ public class StudentServiceImpl implements StudentService {
 
 	@Override
 	public Page<StudentDTO> getStudents(int page, int size) {
-Log.info("list of course from: {}", page);
+     Log.info("list of students from: {}", page);
 		
 		PageRequest pageRequest = PageRequest.of(page, size, Sort.by(Direction.DESC, "id"));
 		return studentRepository.findByActiveTrue(pageRequest)
@@ -91,7 +94,13 @@ Log.info("list of course from: {}", page);
 		
 	}
 	
-	
+	@Override
+	public List<StudentDTO> getAllStudents() {
+				return studentRepository.findByActiveTrue().stream()
+				.map(student -> mapper.map(student, StudentDTO.class))
+				.collect(Collectors.toList());
+	}
+
 	
 	
 	
