@@ -134,7 +134,7 @@ git clone https://github.com/your-username/student-management-system.git
 
 ### 🔐 Login Page
 
-<img width="1366" height="768" alt="Screenshot (1252)" src="https://github.com/user-attachments/assets/02cc9277-e9b0-41d0-850a-6ffb99770411" />
+Screenshot (1252).png
 
 ### 📊 Dashboard
 
